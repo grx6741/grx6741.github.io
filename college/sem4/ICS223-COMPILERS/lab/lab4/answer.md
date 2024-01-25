@@ -98,3 +98,6 @@ Bluetooth Connection:
 ```
 
 ![Screencast from 25-01-24 03 23 23 PM IST](https://github.com/grx6741/grx6741.github.io/assets/73749042/a4a9b7d6-4257-417d-9153-c65a0682b5a0)
+
+## Inferences
+A hub recieves a packet from one device and sends it to every device.

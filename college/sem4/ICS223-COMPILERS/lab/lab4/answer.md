@@ -24,6 +24,7 @@ Simulation mode. (Send ping packets using the Traffic generator from PC-A)
 ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/c82ae169-6ca9-49cb-89f6-4022943a1d43)
 
 ## Observation
+- PC-A
 ```console
 C:\>ipconfig
 
@@ -47,7 +48,7 @@ Bluetooth Connection:
    Default Gateway.................: ::
                                      0.0.0.0
 ```
-
+- PC-B
 ```console
 C:\>ipconfig
 
@@ -71,7 +72,7 @@ Bluetooth Connection:
    Default Gateway.................: ::
                                      0.0.0.0
 ```
-
+- PC-C
 ```console
 C:\>ipconfig
 

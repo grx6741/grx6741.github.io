@@ -5,7 +5,7 @@
 - Write a lex program to check whether given person is belong to IIIT Kottayam
   ```c
   %{
-#include <stdio.h>
+  #include <stdio.h>
   %}
 
   id (20)((1[89])|(2[0-3]))((BC[SDY])|(BEC))([0][0-9]{3})

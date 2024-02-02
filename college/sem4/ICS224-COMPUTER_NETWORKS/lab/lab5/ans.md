@@ -107,3 +107,8 @@ Router#
 | PC-C (Home)   | PC-E (Club)   | 0.015 s | 0.027 s |
 | PC-E (Club)   | PC-B (Office) | 0.016 s | 0.026 s |
 | PC-E (Club)   | PC-C (Home)   | 0.012 s | 0.022 s |
+
+###### Inference
+
+- We can see maximum latency when packets are going through Home's Router since it is connected
+to multiple routers

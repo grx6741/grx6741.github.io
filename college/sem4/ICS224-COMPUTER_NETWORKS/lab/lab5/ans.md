@@ -23,7 +23,7 @@ To establish the connection between three different networks: Office, Home and C
 - Class A & C IP Address using Static IP configuration.
 
 #### Observation
-
+![p1](https://github.com/grx6741/grx6741.github.io/assets/73749042/2d708ace-4209-43d0-a610-9c297ace7297)
 #### Output
 
 - `ping` from PC-A to PC-F

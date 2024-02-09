@@ -310,14 +310,14 @@ int main() {
 [Packet1]
 [Message 0]:	 153		 10011001
 [Message 1]:	 226		 11100010
-[Message 2]:	 36			 00100100
+[Message 2]:	 36		 00100100
 [Message 3]:	 132		 10000100
 [Message 4]:	 218		 11011010
 
 [Packet2]
 [Message 0]:	 153		 10011001
 [Message 1]:	 226		 11100010
-[Message 2]:	 36			 00100100
+[Message 2]:	 36		 00100100
 [Message 3]:	 132		 10000100
 [Message 4]:	 219		 11011011
 

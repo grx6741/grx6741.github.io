@@ -26,10 +26,10 @@ a webserver (belonging to the same subnet of the DHCP server) from the PC of Net
 
 ### Physical Connection
 
-Network 1
-- ![Layout1](https://github.com/grx6741/grx6741.github.io/assets/73749042/fc85cd9d-976e-44ba-8d8c-7e3d61c146a9)
+- Network 1
+  ![Layout1](https://github.com/grx6741/grx6741.github.io/assets/73749042/fc85cd9d-976e-44ba-8d8c-7e3d61c146a9)
 
-Network 2
+- Network 2
   ![layout2](https://github.com/grx6741/grx6741.github.io/assets/73749042/1552309d-0fdb-4a54-947b-236ee73db0ee)
 
 ### Output

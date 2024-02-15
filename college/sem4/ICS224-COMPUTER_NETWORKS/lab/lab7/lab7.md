@@ -34,6 +34,15 @@ a webserver (belonging to the same subnet of the DHCP server) from the PC of Net
   
   ![layout2](https://github.com/grx6741/grx6741.github.io/assets/73749042/1552309d-0fdb-4a54-947b-236ee73db0ee)
 
+### Simulation
+- Network 1
+
+  ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/08657815-bb54-4818-b9cf-a118aa8737b0)
+
+- Network 2
+
+  ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/70c8dc2d-873e-4f3f-b9d5-702af8a415a8)
+
 ### Output
 - Ping from `PC-A` to `PC-B`
   ```console

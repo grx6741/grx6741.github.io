@@ -58,15 +58,28 @@ Network 2
   ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/195a00e8-e8b4-4fec-9a81-2373b3094f1b)
   
   - PC-B
-  - 
+    
   ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/8589f0d2-c72c-496b-9075-61a3d6f9fa88)
+  
   - PC-C
+    
   ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/8b675546-0ea9-4e3a-97e8-62a8f9e50f37)
-  - PC-D 
+  
+  - PC-D
+    
   ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/20192d11-159b-4928-a74c-a1a01b813664)
-- Server Pool Entries ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/8e17d6dc-13fb-4196-a2a9-c6bd31d6a9d0)
-- DNS Table ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/3dba8cf5-9467-4f5d-ada6-8a25b5409c37)
-- Website from PC-A ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/57d1524d-cf21-4b73-a053-3c7cb60156fe)
+  
+- Server Pool Entries
+  
+  ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/8e17d6dc-13fb-4196-a2a9-c6bd31d6a9d0)
+  
+- DNS Table
+  
+  ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/3dba8cf5-9467-4f5d-ada6-8a25b5409c37)
+  
+- Website from PC-A
+  
+  ![image](https://github.com/grx6741/grx6741.github.io/assets/73749042/57d1524d-cf21-4b73-a053-3c7cb60156fe)
 
 
 

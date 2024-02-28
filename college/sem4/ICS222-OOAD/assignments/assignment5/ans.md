@@ -8,6 +8,14 @@
 #
 #
 #
+#
+#
+#
+#
+#
+#
+#
+#
 # Activity Diagram for Library Management System in a College
 
-![p2](https://github.com/grx6741/grx6741.github.io/assets/73749042/cb5e0c44-84fa-487a-9345-f8e728da8565)
+![p2](https://github.com/grx6741/grx6741.github.io/assets/73749042/a20991fb-45bd-4a37-98ae-9bba40a6d32a)

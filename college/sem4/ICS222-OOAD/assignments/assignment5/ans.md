@@ -4,5 +4,5 @@
 
 # Sequence diagram for Media Streaming Player
 
-![1](https://github.com/grx6741/grx6741.github.io/assets/73749042/3d152b1d-c7c4-41a8-a213-d1af93706785)
 
+![p1](https://github.com/grx6741/grx6741.github.io/assets/73749042/4f97c769-edd5-4133-b946-679e9dbae896)

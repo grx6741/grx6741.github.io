@@ -49,9 +49,6 @@ uint16_t CRC_reminder(uint16_t dividend, uint16_t divisor) {
 	int initial_dividend_size = (int)log2(dividend);
 
 	uint16_t mask = pow(2, mask_size) - 1;
-	//mask <<= (8 * sizeof(uint16_t) - mask_size);
-	//dividend <<= (8 * sizeof(uint16_t) - (initial_dividend_size + 1));
-	//divisor <<= (8 * sizeof(uint16_t) - mask_size);
 	dividend <<= (mask_size - 1);
 	mask <<= (int)(log2(dividend) - log2(divisor)) + 1;
 	divisor <<= (int)(log2(dividend) - log2(divisor)) + 1;
@@ -66,18 +63,20 @@ uint16_t CRC_reminder(uint16_t dividend, uint16_t divisor) {
 
 	uint16_t rem;
 	// for (int i = 0; i < (int)log2(dividend) + mask_size - 1; i++) {
+	int i = 0;
 	while (log2(dividend) + 1 > 4) {
-		// printf("Iter: %d\n", i);
+		//printf("Iter: %d\n", i++);
 		rem = ((dividend & mask) ^ divisor) | (~mask & dividend);
-		// LOG_BIN(rem);
+		if (!rem) break;
+		//LOG_BIN(rem);
 		int first_rem = get_first_1(rem);
 		int first_mask = get_first_1(mask);
 
 		mask >>= first_mask - first_rem;
 		divisor >>= abs(first_mask - first_rem);
 
-		// LOG_BIN(mask);
-		// LOG_BIN(divisor);
+		//LOG_BIN(mask);
+		//LOG_BIN(divisor);
 
 		dividend = rem;
 		//printf("----------\n");
@@ -90,11 +89,31 @@ int main() {
 	uint16_t data = get_dividend();
 	uint16_t divisor = get_divisor();
 
+	printf("Data: \t\t\t\t\t\t");
+	LOG_BIN(data);
+	printf("Divisor: \t\t\t\t\t");
+	LOG_BIN(divisor);
+
 	uint16_t reminder = CRC_reminder(data , divisor);
+	printf("Remainder: \t\t\t\t\t");
 	LOG_BIN(reminder);
 
 	// Adding reminder to data
-	LOG_BIN(data);
-	uint16_t data_sent = (data << (int)(log2(divisor) + 1)) | (int)remainder;
-	LOG_BIN(data_sent);
+	uint16_t data_sent = (data << (int)(log2(divisor))) | (int)reminder;
+
+	// At reciever side
+	uint16_t recieved_data = data_sent;
+	recieved_data ^= 1 << ((int)log2(recieved_data) - 2);
+
+	printf("At reciever side, recieved data: \t\t");
+	LOG_BIN(recieved_data);
+
+	reminder = CRC_reminder(recieved_data, divisor);
+	printf("Reminder calculated at reciever side: \t\t");
+	LOG_BIN(reminder);
+
+	if (reminder == 0)
+		printf("Message is not Corrupted\n\t\t");
+	else
+		printf("Message is Corrupted\n\t\t");
 }

@@ -1,0 +1,18 @@
+while (1 > 2) {
+    int a = 2;
+}
+
+if ( a > b ) {
+    int c = 10;
+    int q = 10;
+} else if (10 == 20) {
+    int hello = 69;
+    while (true) {
+        int k = 10;
+    }
+} else if (20) {
+    float k = 420.69;
+} else {
+    bool a = true;
+}
+

@@ -1,0 +1,8 @@
+IF=1
+ELSE=2
+WHILE=3
+VAR=4
+SPACE=5
+'if'=1
+'else'=2
+'while'=3

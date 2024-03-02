@@ -139,3 +139,74 @@ At reciever side, recieved data: 		    0000001110110010
 Reminder calculated at reciever side: 		0000000000001000
 Message is Corrupted
 ```
+
+2. Write the C/C++ Program to implement Hamming code algorithm to detect and correct the error in the transmitted data.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+int main() {
+    std::vector<int> data = {1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0};
+    std::vector<int> powers_of_2;
+    for (int i = 0; i < 10; ++i) {
+        powers_of_2.push_back(pow(2, i));
+    }
+
+    for (int i = 0; i < data.size(); ++i) {
+        if (std::find(powers_of_2.begin(), powers_of_2.end(), i) != powers_of_2.end() || i == 0) {
+            data.insert(data.begin() + i, 0);
+        }
+    }
+
+    int i = 1;
+    while (i < data.size()) {
+        int n = static_cast<int>(floor(log2(i)));
+        for (int j = 0; j < data.size(); ++j) {
+            if ((j >> n) & 1) {
+                data[i] ^= data[j];
+            }
+        }
+        i *= 2;
+    }
+
+	// Extended Hamming Code
+	for (int i = 0; i < data.size(); i++) {
+		data[0] ^= data[i];
+	}
+
+    int error = 0;
+    for (int num : data) {
+        if (num == 1) {
+            error ^= num;
+        }
+    }
+
+    if (data.size() % 2 == 0 && error != 0) {
+        std::cout << "2 bit error" << std::endl;
+    } else if (data.size() % 2 != 0) {
+        std::cout << "Error @ " << error << std::endl;
+        data[error] = !data[error];
+        std::cout << "Corrected: \t";
+        for (int num : data) {
+            std::cout << num << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    return 0;
+}
+```
+
+```console
+Test case 1: 
+No Error Detected
+
+Test case 1: 
+Error @ 4
+Corrected: 1111100101011100
+
+Test case 3: 
+2 bit error
+```

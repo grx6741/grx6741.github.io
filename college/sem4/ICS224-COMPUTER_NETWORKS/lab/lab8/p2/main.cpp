@@ -5,10 +5,13 @@
 #include <vector>
 
 #define LOG_BIN(x) printf("%s\n", bin_to_str((x)))
+#define LOG_BIN_STR(x) printf("%s\n", (x))
+#define LOG_NUM(x, text) printf("%s : %d\n", (text), (x))
+#define USIZE (8 * sizeof(uint16_t))
 
 char* bin_to_str(uint16_t num) {
 	uint16_t n = num;
-	int size = 8 * sizeof(uint16_t);
+	int size = USIZE;
 	char* bin_str = (char*)malloc(size + 1);
 	for (int i = 0; i < size; i++) {
 		bin_str[size - i - 1] = '0' + (n % 2);
@@ -18,52 +21,78 @@ char* bin_to_str(uint16_t num) {
 	return bin_str;
 }
 
-int str_to_bin(char* bin_str) {
-	int num = 0;
+uint16_t str_to_bin(const char* bin_str) {
+	uint16_t num = 0;
 	int n = strlen(bin_str);
 	for (int i = 0; i < n; i++) {
-		num += (bin_str[n - i - 1] - '0') * std::pow(2, i);
+		num += (bin_str[n - i - 1] - '0') * pow(2, i);
 	}
 	return num;
 }
 
 int get_first_1(uint16_t num) {
-	int j = 8 * sizeof(uint16_t);
-	while ((num & (int)std::pow(2, j-1)) == 0) {
+	int j = USIZE;
+	while ((num & (int)pow(2, j-1)) == 0) {
 		j--;
 	}
 	//printf("%d\n", j);
 	return j;
 }
 
-std::vector<char> get_input() {
-	return {1,0,0,1,1,0,1,1,1,0,0};
+std::vector<int> get_input() {
+	std::vector<int> vec = {1, 0, 0, 1, 1, 0, 1, 1, 1, 0};
+	return vec;
 }
 
-std::vector<char> construct(std::vector<char> input) {
-	std::vector<char> ret(input.size() + (int)std::log2(input.size()));
-	int j = 0;
+void construct(std::vector<int>& data) {
 	int i = 0;
-	while (j < input.size()) {
-		if (i == 0) continue;
-		if (std::ceil(std::log2(i)) == std::floor(std::log2(i))) {
-			ret[i] = 0;
-			continue;
+	while (i < data.size()) {
+		if (i == 0 || ceil(log2(i)) == floor(log2(i))) {
+			data.insert(data.begin() + i, 0);
 		}
-		ret[i++] = input[j++];
+		i++;
 	}
-	return ret;
+}
+
+void compute_hamming_parities(std::vector<int>& data) {
+	for (int i = 1; i < data.size(); i *= 2) {
+		int n = floor(log2(i));
+		for (int j = 1; j < data.size(); j++) {
+			if ((1 << n) & j) data[i] ^= data[j];
+		}
+	}
+	// Extended Hamming Code parity bit in 0th index
+	for (int i = 1; i < data.size(); i++) {
+		data[0] ^= data[i];
+	}
+}
+
+int check_hamming_data(std::vector<int> data) {
+	int error_index = 0;
+	for (int i = 0; i < data.size(); i++) {
+		if (data[i] == 1) error_index ^= i;
+		i++;
+	}
+	return error_index;
 }
 
 template<typename T>
-void print(std::vector<T> vec) {
-	for (T a : vec) std::cout << (int)a << " ";
+void print_vector(std::vector<T> vec, const char* LOG) {
+	std::cout << "[" << LOG << "]: ";
+	for (T a : vec) {
+		std::cout << a;
+	}
 	std::cout << std::endl;
 }
 
 int main() {
-	std::vector<char> input = get_input();
-	std::vector<char> constructed = construct(input);
-	print(input);
-	print(constructed);
+	std::vector<int> input = get_input();
+	print_vector(input, "Before Processing");
+	construct(input);
+	compute_hamming_parities(input);
+	print_vector(input, "Computed Parities");
+
+	// At reciever side;
+	std::vector<int> rec = input;
+	std::cout << check_hamming_data(input);
 }

@@ -27,15 +27,17 @@ void* sender(void* ptr) {
 	int W = 4;
 
 	// FIRST MSG
-	DATA = msg[i];
-	STATUS = MESSAGE_SENT;
-	printf("[SERVER] Sent MESSAGE[%d] %c\n", i, DATA);
+	// DATA = msg[i];
+	// STATUS = MESSAGE_SENT;
+	// printf("[SERVER] Sent MESSAGE[%d] %c\n", i, DATA);
 
 	std::queue<status> status_of_messages;
 
 	int i = 0;
 	while (i < msg_len) {
-		DATA.push(msg[i]);
+		if (i < W)
+			DATA.push(msg[i]);
+
 	 	// LOG("[SERVER] Waiting for Acknowledgement...\n");
 	 	// while (STATUS == MESSAGE_SENT);
 		// sleep(RTT);

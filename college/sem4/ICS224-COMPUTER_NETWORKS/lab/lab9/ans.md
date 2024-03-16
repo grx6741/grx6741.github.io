@@ -1,6 +1,8 @@
 # ICS224 COMPUTER NETWORKS
 
-## Lab 9 
+## Lab 9
+
+> Gowrish I (2022BCS0155)
 
 - Stop And Wait ARQ
 

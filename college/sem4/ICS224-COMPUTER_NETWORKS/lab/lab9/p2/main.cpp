@@ -9,6 +9,7 @@
 #define RTT 1
 
 #define LOG(x) printf("%s\n", (x))
+#define WINDOW_SIZE 4
 
 typedef enum {
 	INITIAL_STATE = 0,
@@ -17,26 +18,48 @@ typedef enum {
 	FRAME_LOST
 } status;
 
-status STATUS = INITIAL_STATE;
+status RECIEVER_STATUS = INITIAL_STATE;
+
 std::queue<char> DATA;
+
+void send_message(const char* msg, int i) {
+	DATA.push(msg[i]);
+}
 
 void* sender(void* ptr) {
 	char* msg = (char*)ptr;
 	int msg_len = strlen(msg);
-
-	int W = 4;
 
 	// FIRST MSG
 	// DATA = msg[i];
 	// STATUS = MESSAGE_SENT;
 	// printf("[SERVER] Sent MESSAGE[%d] %c\n", i, DATA);
 
-	std::queue<status> status_of_messages;
-
 	int i = 0;
+	int j = 0;
 	while (i < msg_len) {
-		if (i < W)
+		if (i < WINDOW_SIZE) {
+			printf("[SERVER] Sent MESSAGE[%d] %c\n", i, msg[i]);
 			DATA.push(msg[i]);
+			i++;
+		}
+
+		while (DATA.size() >= WINDOW_SIZE);
+
+		switch (RECIEVER_STATUS) {
+			case ACK_SENT:
+				LOG("[SERVER] Acknowledgement Recieved\n");
+				i++;
+				j++;
+				send_message(msg, i);
+				printf("[SERVER] Sent MESSAGE[%d] %c\n", i, msg[i]);
+				break;
+			case FRAME_LOST:
+				LOG("[SERVER] Acknowledgement Not Recieved\n");
+				printf("[SERVER] Resent MESSAGE[%d] %c\n", j, msg[j]);
+				send_message(msg, j);
+				break;
+		}
 
 	 	// LOG("[SERVER] Waiting for Acknowledgement...\n");
 	 	// while (STATUS == MESSAGE_SENT);
@@ -52,28 +75,48 @@ void* sender(void* ptr) {
 	 	// STATUS = MESSAGE_SENT;
 	 	// printf("[SERVER] Sent MESSAGE[%d] %c\n", i, DATA);
 	}
+	return 0;
 }
-
 void* reciever(void* ptr) {
 	int msg_len = *(int*)ptr;
-	int i = 0; // Number of bits
-	int j = 0; // number of iterations
-	char message[msg_len];
+	char msg[msg_len];
+
+	int i = 0;
+	int j = 0;
 	while (i < msg_len + 1) {
-		while (STATUS != MESSAGE_SENT);
-		sleep(RTT);
-		if ((j+1) % 4 != 0) {
-			STATUS = ACK_SENT;
-			printf("[RECIEVER] Recieved MESSAGE[%d] %c\n", i, DATA);
-			message[i] = DATA;
-			i++;
+		while (DATA.size() < WINDOW_SIZE); // wait
+		if ((j+1) % 5 == 0) {
+			RECIEVER_STATUS = FRAME_LOST;
+	 		printf("[RECIEVER] Frame[%d] Lost \n", i);
 		} else {
-			STATUS = FRAME_LOST;
-			printf("[RECIEVER] Frame[%d] Lost \n", i);
+	 		RECIEVER_STATUS = ACK_SENT;
+	 		printf("[RECIEVER] Recieved MESSAGE[%d] %c\n", i, DATA.front());
+	 		msg[i] = DATA.front();
+	 		i++;
 		}
 		j++;
+		DATA.pop();
 	}
-	printf("[RECIEVER] Final Message Recieved: %s\n", message);
+
+	// int i = 0; // Number of bits
+	// int j = 0; // number of iterations
+	// char message[msg_len];
+	// while (i < msg_len + 1) {
+	// 	while (STATUS != MESSAGE_SENT);
+	// 	sleep(RTT);
+	// 	if ((j+1) % 4 != 0) {
+	// 		STATUS = ACK_SENT;
+	// 		printf("[RECIEVER] Recieved MESSAGE[%d] %c\n", i, DATA);
+	// 		message[i] = DATA;
+	// 		i++;
+	// 	} else {
+	// 		STATUS = FRAME_LOST;
+	// 		printf("[RECIEVER] Frame[%d] Lost \n", i);
+	// 	}
+	// 	j++;
+	// }
+	// printf("[RECIEVER] Final Message Recieved: %s\n", message);
+	return 0;
 }
 
 int main() {

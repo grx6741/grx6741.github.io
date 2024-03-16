@@ -4,7 +4,7 @@
 #include <pthread.h>
 #include <unistd.h>
 
-#define RTT 1
+#define RTT 0
 
 #define LOG(x) printf("%s\n", (x))
 

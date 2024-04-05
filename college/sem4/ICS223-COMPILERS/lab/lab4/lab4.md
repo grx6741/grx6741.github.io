@@ -1,6 +1,6 @@
 # Lab 4
 
-# Gowrish I 2022BCS0144
+# HARSH VARDHAN CHOUHAN SINGH 2022BCD0044
 
 - Write a lex program to check whether given person is belong to IIIT Kottayam
   ```c

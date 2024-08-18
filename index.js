@@ -4705,6 +4705,9 @@ var asm = createWasm();
 var ___wasm_call_ctors = Module["___wasm_call_ctors"] = createExportWrapper("__wasm_call_ctors");
 
 /** @type {function(...*):?} */
+var _malloc = Module["_malloc"] = createExportWrapper("malloc");
+
+/** @type {function(...*):?} */
 var __sapp_emsc_onpaste = Module["__sapp_emsc_onpaste"] = createExportWrapper("_sapp_emsc_onpaste");
 
 /** @type {function(...*):?} */
@@ -4739,9 +4742,6 @@ var __sfetch_emsc_failed_http_status = Module["__sfetch_emsc_failed_http_status"
 
 /** @type {function(...*):?} */
 var __sfetch_emsc_failed_buffer_too_small = Module["__sfetch_emsc_failed_buffer_too_small"] = createExportWrapper("_sfetch_emsc_failed_buffer_too_small");
-
-/** @type {function(...*):?} */
-var _malloc = Module["_malloc"] = createExportWrapper("malloc");
 
 /** @type {function(...*):?} */
 var _free = Module["_free"] = createExportWrapper("free");
